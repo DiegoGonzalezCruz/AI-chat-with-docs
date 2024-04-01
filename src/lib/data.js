@@ -1,10 +1,11 @@
-import fs from "fs/promises";
+"use server";
+import fs from "fs";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import path from "path";
 import { OpenAIEmbeddings } from "@langchain/openai";
 import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
 
-const openAIApiKey = process.env.OPENAI_API_KEY;
+const openAIApiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
 
 // Async function to fetch data from a local file
 export async function fetchData() {
@@ -33,6 +34,7 @@ export async function fetchData() {
 }
 
 export async function createEmbedding() {
+  // return console.log("Creating embeddings...", openAIApiKey);
   const output = await fetchData();
   const embeddings = new OpenAIEmbeddings({
     openAIApiKey: openAIApiKey,
